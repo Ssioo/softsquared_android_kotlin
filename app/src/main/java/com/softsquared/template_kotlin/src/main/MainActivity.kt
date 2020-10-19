@@ -13,10 +13,14 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     }
 
     fun tryFetchTestData() {
+        showProgressDialog()
         MainService().fetchTestData({
+            hideProgressDialog()
             Logger.d(it)
             tv_test.text = "Success!"
         }, {
+            hideProgressDialog()
+            tv_test.text = "Failure!"
             showToast(it ?: getString(R.string.network_error))
         })
     }
